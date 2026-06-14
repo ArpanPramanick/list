@@ -1,128 +1,218 @@
-# PYTHON LISTS
+# Python Lists
 
-[cite_start]A list is a container that can store multiple values (of multiple or same types) in a specific order[cite: 2]. [cite_start]Lists are one of 4 built-in data types in Python used to store collections of data[cite: 3].
+This is a GitHub-ready Markdown version based on your PDF notes.
 
-* [cite_start]`numbers = [10, 20, 30, 40]` [cite: 4]
-* [cite_start]`numbers` → variable [cite: 5]
-* [cite_start]`[10, 20, 30, 40]` → list object [cite: 6]
-* [cite_start]`10, 20, 30, 40` → elements/items [cite: 7]
+## What is a List?
 
-### 1. Key Features
-| FEATURE | SUPPORTED? |
-| :--- | :--- |
-| **Ordered** | [cite_start]Yes [cite: 9] |
-| **Mutable** | [cite_start]Yes [cite: 9] |
-| **Duplicate values allowed** | [cite_start]Yes [cite: 9] |
-| **Heterogeneous data allowed** | [cite_start]Yes [cite: 9] |
-| **Indexed** | [cite_start]Yes [cite: 9] |
-| **Dynamic size** | [cite_start]Yes [cite: 9] |
+A list is a container that can store multiple values (same or different types) in a specific order.
 
----
+```python
+numbers = [10, 20, 30, 40]
+data = [10, "Python", 3.14, True]
+```
 
-### 2. Mutability & Memory Management
-[cite_start]Lists are mutable[cite: 10]. [cite_start]Python does not automatically intern or reuse separately created list literals, because a change in value by one referencing variable would affect others if they referenced the same object[cite: 27]. 
+## Properties
 
-* [cite_start]If `a = [1, 2]`, Python creates an object in memory with value 1, another with value 2, creates list object `refa`, and stores the references inside it[cite: 17, 18].
-* [cite_start]If `b = [1, 2]` is executed next, Python reuses the integer object references but creates another separate list object `refb`[cite: 20, 21, 22].
-* [cite_start]Therefore, `print(a is b)` returns FALSE[cite: 25, 26].
+- Ordered
+- Mutable
+- Supports indexing
+- Supports slicing
+- Allows duplicates
 
-**Internal Memory Concept:**
-[cite_start]A list does not usually store the actual object; it stores the address (reference) of the object[cite: 213]. [cite_start]Python physically doesn't put the value inside the list[cite: 203, 204]. [cite_start]If Python copied the entire object every time it was placed in a list, a lot of memory would be wasted[cite: 214]. 
+## Creating Lists
 
----
+```python
+lst = []
+nums = [1, 2, 3]
 
-### 3. Creating Lists
+lst = list()
+chars = list("python")
+```
 
-[cite_start]Lists can be created using `[]` or the `list()` constructor[cite: 30, 31]. 
+## list(iterable)
 
-* [cite_start]**`list(iterable)`:** A built-in constructor function that creates a new list object by taking an iterable as a single parameter[cite: 32]. [cite_start]It creates a new list object and populates it with elements obtained by iterating over the given iterable[cite: 36].
-    * [cite_start]**String:** `list("python")` outputs `['p', 'y', 't', 'h', 'o', 'n']`[cite: 59, 60]. [cite_start]It creates new string element objects[cite: 67].
-    * [cite_start]**Tuple:** `list((10, 20, 30))` outputs `[10, 20, 30]`[cite: 69, 70, 71]. [cite_start]Stores the references directly[cite: 73].
-    * [cite_start]**Set:** `list({10, 20, 30})` outputs `[10, 20, 30]` or `[30, 10, 20]` because sets are unordered[cite: 80, 81, 83, 84].
-    * [cite_start]**Dictionary:** `list(d)` outputs keys by default, e.g., `['a', 'b', 'c']`[cite: 94, 95, 97]. [cite_start]Use `list(d.values())` for values and `list(d.items())` for key-value tuples[cite: 102].
-* [cite_start]**`[]` (Method):** It takes more than one element (object reference) as input and creates a list by directly storing those references[cite: 152, 153, 158].
+```python
+list("abc")
+list((1,2,3))
+list(range(5))
+```
 
-**`list()` vs `[]`:**
-* [cite_start]`lst = list("ab")` iterates over the string, creating `['a', 'b']`[cite: 170, 186, 189].
-* [cite_start]`lst = ["ab"]` stores the string reference directly, creating `['ab']`[cite: 163, 178].
+## String to List
 
----
+```python
+list("python")
+# ['p','y','t','h','o','n']
+```
 
-### 4. Copying Lists
-* [cite_start]**Assignment (`b = a`):** Both point to the same list object[cite: 394, 395, 396]. [cite_start]`a is b` results in True[cite: 128, 132, 134]. [cite_start]Changes through any referencing variable affect the actual memory object[cite: 135].
-* [cite_start]**Shallow Copy (`b = list(a)` or `b = a.copy()`):** Creates a separate list object[cite: 148, 149, 151, 401]. [cite_start]`a is b` is false[cite: 111, 115]. [cite_start]However, internally both reference the same element objects, so `a[0] is b[0]` is True[cite: 113, 116, 118, 120].
+## Tuple to List
 
----
+```python
+list((10,20,30))
+```
 
-### 5. Indexing & Slicing
-[cite_start]Lists support both positive and negative indexing[cite: 222]. [cite_start]They also support slicing[cite: 224].
+## Dictionary to List
 
-| -5 | -4 | -3 | -2 | -1 |
-| :---: | :---: | :---: | :---: | :---: |
-| 10 | 20 | 30 | 40 | 50 |
-| **0** | **1** | **2** | **3** | **4** | 
-[cite_start]*(Reference Table [cite: 223])*
+```python
+d = {"a":10,"b":20}
 
----
+list(d)
+# ['a','b']
+```
 
-### 6. Built-in Methods
+## Indexing
 
-#### Adding Elements
-* [cite_start]**`list.append(elmnt)`:** Appends that element reference to the end of the list[cite: 228]. [cite_start]If the element is mutable (like another list), modifying it later will affect the parent list[cite: 229, 239, 241, 242].
-* [cite_start]**`list.extend(iterable)`:** Adds the specified iterable elements to the end of the current list[cite: 245]. [cite_start]Acts exactly like a `for` loop executing `list.append(item)`[cite: 247, 248]. [cite_start]Throws a TypeError if an integer is passed[cite: 250].
-* [cite_start]**`list.insert(pos, elmnt)`:** Inserts a reference to the given object at the specified position `pos`[cite: 253]. [cite_start]It never throws an indexing error[cite: 255].
+```python
+nums = [10,20,30,40,50]
 
-#### Removing Elements
-* [cite_start]**`list.remove(elmnt)`:** Removes the first occurrence (from left) of the specified value[cite: 258]. [cite_start]If the value is not present, it throws an ERROR[cite: 259].
-* [cite_start]**`list.pop(pos)`:** Removes the element at the specified position[cite: 266]. [cite_start]If `pos` is omitted, the default value is -1, which returns the last item[cite: 268, 269]. [cite_start]Throws an OUT OF INDEX ERROR if out of bounds[cite: 266, 267].
-* [cite_start]**`list.clear()`:** Removes all elements from a list, making it an empty list[cite: 276].
+nums[0]
+nums[-1]
+```
 
-#### Searching
-* [cite_start]**`list.index(elmnt, start, end)`:** Returns the position at the first occurrence of the element value within the range[cite: 281]. [cite_start]Throws an ERROR if the element is not present[cite: 281].
-* [cite_start]**`list.count(value)`:** Returns the number of elements with the specified value[cite: 286]. [cite_start]Returns 0 if no element is there with that value[cite: 286, 287].
+## Slicing
 
-#### Sorting & Reversing
-* [cite_start]**`sorted(iterable, key=key, reverse=reverse)`:** Built-in function that returns a new sorted list of the specified iterable object[cite: 299]. [cite_start]Original list remains unchanged[cite: 316]. [cite_start]All elements must be comparable, otherwise it produces a TypeError[cite: 299, 303, 318].
-* [cite_start]**`list.sort(reverse=True|False, key=myFunc)`:** List method that sorts the list ascending by default, modifying the existing list in-place and returning `None`[cite: 318, 348, 350]. 
-* [cite_start]**`list.reverse()`:** In-place reversal of the list, reverses the order of the elements[cite: 351].
+```python
+nums[:]
+nums[1:]
+nums[:3]
+nums[::-1]
+```
 
----
+## append()
 
-### 7. Useful Functions
-* [cite_start]**`len(list)`:** Returns length (# of elements) of the list[cite: 353].
-* [cite_start]**`max(list)`:** Returns max among elements of the list by comparing them[cite: 358]. [cite_start]Elements must be comparable[cite: 359].
-* [cite_start]**`min(list)`:** Returns min among elements of the list by comparing them[cite: 367, 368].
-* [cite_start]**`sum(list)`:** Returns the arithmetic sum of the elements[cite: 371]. [cite_start]Elements must be numeric types or support addition, otherwise a TypeError is raised[cite: 371, 372].
+```python
+nums.append(100)
+```
 
----
+## extend()
 
-### 8. Operators on Lists
-* [cite_start]**`+` (Concatenation):** `[1, 2] + [3, "Ab"]` outputs `[1, 2, 3, "Ab"]`[cite: 383, 384, 385].
-* [cite_start]**`*` (Repetition):** `[1, 2] * 3` outputs `[1, 2, 1, 2, 1, 2]`[cite: 386, 387, 388].
-* [cite_start]**`in` (Membership):** `10 in [10, 20, 30]` outputs `True`[cite: 389, 390, 391].
+```python
+nums.extend([4,5])
+```
 
----
+## insert()
 
-### 9. Iterating & List Comprehension
-[cite_start]**Iterating Through Lists:** [cite: 403]
-1.  **Using `for`:** `for x in nums:`
-2.  **Using `range()`:** `for i in range(len(nums)):`
-3.  **Using `enumerate()`:** `for index, value in enumerate(nums):`
+```python
+nums.insert(1,99)
+```
 
-[cite_start]**List Comprehension:** [cite: 404]
-* [cite_start]Traditional: `[x*x for x in range(5)]` outputs `[0, 1, 4, 9, 16]`[cite: 407, 412, 414].
-* [cite_start]With condition: `[x for x in range(10) if x % 2 == 0]` outputs `[0, 2, 4, 6, 8]`[cite: 405, 406, 407, 417].
+## remove()
 
----
+```python
+nums.remove(20)
+```
 
-### [cite_start]10. Time Complexity [cite: 416]
+## pop()
+
+```python
+nums.pop()
+nums.pop(2)
+```
+
+## clear()
+
+```python
+nums.clear()
+```
+
+## index()
+
+```python
+nums.index(20)
+```
+
+## count()
+
+```python
+nums.count(20)
+```
+
+## sorted()
+
+```python
+sorted(nums)
+```
+
+Returns a new list.
+
+## sort()
+
+```python
+nums.sort()
+```
+
+Sorts the original list.
+
+## reverse()
+
+```python
+nums.reverse()
+```
+
+## Useful Functions
+
+```python
+len(nums)
+max(nums)
+min(nums)
+sum(nums)
+```
+
+## Nested Lists
+
+```python
+matrix = [
+ [1,2,3],
+ [4,5,6],
+ [7,8,9]
+]
+
+matrix[1][2]
+```
+
+## Operators
+
+```python
+[1,2] + [3,4]
+[1,2] * 3
+10 in [10,20,30]
+```
+
+## Copying
+
+```python
+b = a
+c = a.copy()
+```
+
+## Iteration
+
+```python
+for x in nums:
+    print(x)
+
+for i in range(len(nums)):
+    print(nums[i])
+
+for index, value in enumerate(nums):
+    print(index, value)
+```
+
+## List Comprehension
+
+```python
+squares = [x*x for x in range(5)]
+
+evens = [x for x in range(10) if x % 2 == 0]
+```
+
+## Time Complexity
 
 | Operation | Complexity |
-| :--- | :--- |
-| Access/Delete by index | O(1) |
-| `append()` | O(1) amortized |
-| `pop()` last | O(1) |
-| `insert()` beginning | O(n) |
-| `remove()` | O(n) |
+|------------|------------|
+| Access | O(1) |
+| append() | O(1) amortized |
+| pop() last | O(1) |
+| insert() beginning | O(n) |
+| remove() | O(n) |
 | search | O(n) |
-| `sort()` | O(n log n) |
+| sort() | O(n log n) |
